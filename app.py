@@ -45,6 +45,7 @@ def quiz():
     # question_indices = session.get('question_indices',
     #                                random.sample(range(len(session['questions'])),8))
     
+    
     # print(q_index)
     # print(session['questions'])
     # q_index = question_indices[curr_index]
