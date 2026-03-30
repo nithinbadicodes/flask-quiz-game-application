@@ -127,9 +127,9 @@ def answer():
 def result():
     score = 0
 
-    for i, q in enumerate(session["questions"]):
-        if session["selected_answers"][i] == q["answer"]:
-            score += 1
+    # for i, q in enumerate(session["questions"]):
+    #     if session["selected_answers"][i] == q["answer"]:
+    #         score += 1
 
     return render_template('final.html',score=score)
 
