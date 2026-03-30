@@ -118,6 +118,50 @@ if (prevBtn) {
 }
 
 
+const reviewNextBtn = document.getElementById('review-next-btn')
+const reviewPrevBtn = document.getElementById('review-prev-btn')
+
+
+// ================= QUIZ =================
+const reviewOptions = document.querySelectorAll(".review-options");
+
+// OPTION CLICK
+reviewOptions.forEach((option, index) => {
+    option.addEventListener("click", () => {
+
+        fetch("/answer", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ answer: index })
+        });
+
+        options.forEach(opt => opt.style.backgroundColor = "");
+        option.style.backgroundColor = "lightblue";
+    });
+});
+
+
+if (reviewNextBtn) {
+    reviewNextBtn.addEventListener("click", () => {
+        fetch("/review_next", { method: "POST" })
+        .then(() => {
+            window.location.href = "/review";
+        });
+    });
+}
+
+if (reviewPrevBtn) {
+    reviewPrevBtn.addEventListener("click", () => {
+        fetch("/review_prev", { method: "POST" })
+        .then(() => {
+            window.location.href = "/review";
+        });
+    });
+}
+
+
 // ================= FINAL PAGE =================
 const returnBtn = document.getElementById("return-btn");
 const reviewBtn = document.getElementById("review-btn")

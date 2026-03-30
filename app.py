@@ -16,12 +16,12 @@ def home():
 
 @app.route("/start")
 def start():
-    # ✅ SAVE difficulty BEFORE clearing
+    #  SAVE difficulty BEFORE clearing
     difficulty = session.get('difficulty', 'Easy')
 
     session.clear()  # clear everything
 
-    # ✅ RESTORE difficulty
+    #  RESTORE difficulty
     session["difficulty"] = difficulty
 
     all_questions = {
@@ -79,6 +79,25 @@ def prev():
     return redirect("/quiz")
 
 
+@app.route("/review_next", methods=["POST"])
+def review_next():
+    # FIX: stop at last question
+    if session["current_index"] < 7:
+        session["current_index"] += 1
+        return redirect("/review")
+    else:
+        session["current_index"] = 8
+        return redirect("/result")
+
+
+@app.route("/review_prev", methods=["POST"])
+def review_prev():
+    if session["current_index"] > 0:
+        session["current_index"] -= 1
+
+    return redirect("/review")
+
+
 @app.route("/set_difficulty", methods=["POST"])
 def set_difficulty():
     data = request.get_json()
@@ -116,25 +135,18 @@ def result():
     return render_template('final.html', score=score)
 
 
-@app.route("/review")
+@app.route("/review",methods=['GET'])
 def review():
     print('review function entered')
     curr_index = session.get("current_index", 0)
-
-    # # FIX: prevent index out of range
-    # if curr_index >= 8:
-    #     return redirect("/result")
-
-    question_indices = session.get("question_indices")
-    q_index = question_indices[curr_index]
-    q = session["questions"][q_index]
+    q=session['questions']
 
     return render_template(
-        "quiz.html",
+        "review.html",
         q=q,
         index=curr_index,
         total=8,
-        selected=session["selected_answers"][curr_index]
+        # selected=session["selected_answers"][curr_index]
     )
 
 
