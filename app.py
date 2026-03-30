@@ -14,10 +14,15 @@ app.secret_key = "your_secret_key"
 def home():
     return render_template("front.html")
 
-
 @app.route("/start")
 def start():
+    # ✅ SAVE difficulty BEFORE clearing
     difficulty = session.get('difficulty', 'Easy')
+
+    session.clear()  # clear everything
+
+    # ✅ RESTORE difficulty
+    session["difficulty"] = difficulty
 
     all_questions = {
         "Easy": easy_questions,
@@ -33,6 +38,7 @@ def start():
     session["selected_answers"] = [None] * 8
 
     return redirect("/quiz")
+
 
 
 @app.route("/quiz")
