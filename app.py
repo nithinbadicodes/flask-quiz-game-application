@@ -42,10 +42,9 @@ def start():
 @app.route("/quiz")
 def quiz():
     curr_index = session.get("current_index", 0)
-    # question_indices = session.get('question_indices',
-    #                                random.sample(range(len(session['questions'])),8))
+    # question_indices = session.get('question_indices', random.sample(range(len(session['questions'])),8))
     
-    
+    print(curr_index)
     # print(q_index)
     # print(session['questions'])
     # q_index = question_indices[curr_index]
