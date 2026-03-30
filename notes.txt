@@ -1,0 +1,58 @@
+Trying to merge built web pages with Flask
+
+
+FRONT PAGE
+| Feature            | Use           |
+| ------------------ | ------------- |
+| Play button        | Flask route   |
+| Instructions popup | JS            |
+| Difficulty popup   | JS            |
+| Save difficulty    | Flask session |
+
+
+
+QUIZ PAGE
+| Feature               | Use                        |
+| --------------------- | -------------------------- |
+| Question text         | Flask (passed to template) |
+| Options               | Flask                      |
+| Select option color   | JS                         |
+| Store selected answer | Flask                      |
+| Hint popup            | JS                         |
+| Next/Prev navigation  | Flask                      |
+| Prevent reshuffle     | Flask                      |
+| Question index        | Flask                      |
+
+
+
+FINAL PAGE
+| Feature        | Use                     |
+| -------------- | ----------------------- |
+| Score display  | Flask                   |
+| Feedback       | Flask or JS (both fine) |
+| Review answers | Flask                   |
+| Return home    | Flask                   |
+
+
+
+
+Flask (Backend)
+│
+├── session
+│   ├── questions
+│   ├── selected_answers
+│   ├── score
+│   └── current_index
+│
+├── routes
+│   ├── /
+│   ├── /quiz
+│   ├── /answer
+│   ├── /next
+│   ├── /prev
+│   └── /result
+│
+└── templates (HTML)
+     └── uses JS for UI
+
+

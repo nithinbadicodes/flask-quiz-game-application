@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/quiz-style.css') }}">
+</head>
+<body>
+
+    <div class="main-container">
+
+        <div class="card">
+
+            <!-- NAVBAR -->
+            <div class="navbar">
+                <button id="prev-btn" class="nav-btn" {% if index == 0 %}disabled{% endif %}>
+                    Prev page
+                </button>
+
+                <div id="qno">Qno: {{ index + 1 }}</div>
+
+                <div id="hint-btn">💡</div>
+
+                <button id="next-btn" class="nav-btn">
+                    {% if index == total - 1 %}
+                        Finish
+                    {% else %}
+                        Next page
+                    {% endif %}
+                </button>
+            </div>
+
+            <!-- QUESTION BOX -->
+            <div class="question-box">
+                <p id="question-text">{{ q.question }}</p>
+            </div>
+
+            <!-- OPTIONS -->
+            <div class="options-grid">
+                {% for option in q.options %}
+                    <button class="options">{{ option }}</button>
+                {% endfor %}
+            </div>
+
+            <!-- HINT POPUP -->
+            <div id="hint-popup" class="popup">
+                <div class="popup-content hint-box">
+                    <p id="hint-text">{{ q.hint }}</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ✅ CORRECT SCRIPT TAG -->
+    <script src="{{ url_for('static', filename='js/scriptforflask.js') }}"></script>
+
+</body>
+</html>

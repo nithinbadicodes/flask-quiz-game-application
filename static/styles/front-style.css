@@ -1,0 +1,211 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(10, 18, 38); 
+    color: rgb(235, 240, 255); 
+}
+
+
+/* ================= MAIN LAYOUT ================= */
+.main-container {
+    /* background-color: red; */
+    min-height: 100vh;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ================= CARD ================= */
+.card {
+    /* background-color: red; */
+    width: 100%;
+    max-width: 370px;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+/* ================= TITLE ================= */
+.title {
+    background-color: rgb(18, 28, 60); 
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.title h2 {
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: normal;
+}
+
+
+/* ================= BUTTON GROUP ================= */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+/* ================= BUTTON ================= */
+button {
+    width: 78%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+
+    background-color: rgb(255, 145, 40); 
+    color: rgb(25, 25, 35); 
+
+    /* font-size: clamp(16px, 2vw, 18px); */
+    font-size:17px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Hover */
+button:hover {
+    background-color: rgb(255, 170, 70); 
+}
+
+/* Click */
+button:active {
+    background-color: rgb(220, 115, 20); 
+    transform: scale(0.98);
+}
+
+
+/* ================= DIFFICULTY DISPLAY ================= */
+#difficulty-display {
+    background-color: rgb(18, 28, 60); 
+    width:100%;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+#difficulty-display p {
+    font-size: clamp(16px, 2vw, 20px);
+    color: rgb(190, 200, 230); 
+    /* color:#ccc; */
+}
+
+
+
+/* ===================== INSTRUCTIONS POPUP ================== */
+/* OVERLAY */
+.popup {
+    display: none;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(20, 30, 65, 0.8);
+    z-index: 9999;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.popup.active {
+    display: flex;
+}
+
+/* COMMON BOX */
+.popup-content {
+    border-radius: 15px;
+    padding: 25px;
+}
+
+/* DIFFICULTY */
+.difficulty-box {
+    background-color: #1f2f5a;
+    display: flex;
+    height:18%;
+    gap: 15px;
+}
+
+.difficulty-option {
+    background-color: #ff8c2a;
+    border: none;
+    height:95%;
+    width:40%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    
+}
+
+
+/* INSTRUCTIONS */
+.instructions-box {
+    background-color: #1f2f5a;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.instruction-row {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+
+
+
+.instruction-btn {
+    background-color: #ff8c2a;
+    border: none;
+    width:33%;
+    padding: 10px 18px;
+    border-radius: 10px;
+    
+}
+
+.instruction-icon {
+    background-color: #ff8c2a;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.instruction-text {
+    background-color: #162447;
+    padding: 10px;
+    border-radius: 10px;
+    color: #ccc;
+    flex: 1;
+}
+/* ================= RESPONSIVE  ================= */
+@media (max-width: 480px) {
+    .card {
+        gap: 18px;
+    }
+
+    button {
+        padding: 12px;
+    }
+
+    .title {
+        padding: 16px;
+    }
+}

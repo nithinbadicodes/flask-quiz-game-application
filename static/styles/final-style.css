@@ -1,0 +1,82 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color:rgb(10,18,38);
+    color: rgb(235,240,255);
+}
+
+
+.main-container{
+    min-height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+}
+
+.card {
+    width:100%;
+    max-width: 360px;
+    display:flex;
+    flex-direction: column;
+    gap:24px;
+}
+
+.button-group{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    align-items:center;
+}
+
+
+button {
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border: none;
+    background-color: rgb(255,145,40);
+    color: rgb(25,25,35);
+    font-size: clamp(16px,2vw,18px);
+    cursor:pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background-color: rgb(255,170,70);
+}
+
+button:active {
+    background-color: rgb(220,115,20);
+    transform:scale(0.97);
+}
+
+.score {
+    background-color: rgb(35, 50, 95);
+    padding:18px;
+    border-radius: 12px;
+    text-align:center;
+}
+.score p{
+    font-size: clamp(18px,2vw,20px);
+    color: rgb(190,200,230);
+}
+
+.feedback{
+    background-color: rgb(35, 50, 95);
+    color: rgb(190,200,230);
+    padding:18px;
+    border-radius: 10px;
+    min-height:200px;
+    display:flex;
+    align-items:flex-start;
+}
+
+.feedback p{
+    font-size:16px;
+}

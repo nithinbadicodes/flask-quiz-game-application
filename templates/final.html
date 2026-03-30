@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/final-style.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <div class="card">
+            <div class="score">
+                <p id="score">Your score: {{ score }}/8</p>
+                </div>
+            <div class="feedback">
+                <p id="feedback">Keep it up. Good job</p>
+                
+            </div>
+
+            <div class="button-group">
+
+                <button id="review-btn">Review answers</button>
+                <button id="return-btn">Return to Main menu</button>
+                <button id="exit-btn">Exit game</button>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/scriptforflask.js') }}"></script>
+</body>
+</html>

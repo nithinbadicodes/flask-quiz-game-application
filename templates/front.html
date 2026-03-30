@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-shesh Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/front-style.css') }}">
+</head>
+<body>
+
+    <div class="main-container">
+
+        <div class="card">
+
+            <!-- Title -->
+            <div class="title">
+                <h2>V-shesh: Quiz on disability</h2>
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button id="play-btn">Play</button>
+                
+                <!-- BUTTONS -->
+                <button id="difficulty-btn">Choose Difficulty</button>
+                <button id="instructions-btn">Instructions</button>
+
+                <div id="difficulty-display">Difficulty Level: Easy</div>
+
+
+                <!-- DIFFICULTY POPUP -->
+                <div id="difficulty-popup" class="popup">
+                    <div class="popup-content difficulty-box">
+                        <button class="difficulty-option">Easy</button>
+                        <button class="difficulty-option">Medium</button>
+                        <button class="difficulty-option">Hard</button>
+                    </div>
+                </div>
+
+
+                <!-- INSTRUCTIONS POPUP -->
+                <div id="instructions-popup" class="popup">
+                    <div class="popup-content instructions-box">
+
+                        <div class="instruction-row">
+                            <button class="instruction-btn">Prev page</button>
+                            <div class="instruction-text">
+                                Click on this button to revisit the previous page
+                            </div>
+                        </div>
+
+                        <div class="instruction-row">
+                            <button class="instruction-btn">Next page</button>
+                            <div class="instruction-text">
+                                Click on this button to move forward to the next page
+                            </div>
+                        </div>
+
+                        <div class="instruction-row">
+                            <button class="instruction-icon">💡</button>
+                            <div class="instruction-text">
+                                Click on the bulb icon to view the hint for the question
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+        </div>
+
+    </div>
+    </div>
+<script src="{{ url_for('static', filename='js/scriptforflask.js') }}"></script>
+</body>
+</html>
