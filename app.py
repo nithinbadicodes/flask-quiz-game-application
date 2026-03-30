@@ -116,6 +116,28 @@ def result():
     return render_template('final.html', score=score)
 
 
+@app.route("/review")
+def review():
+    print('review function entered')
+    curr_index = session.get("current_index", 0)
+
+    # # FIX: prevent index out of range
+    # if curr_index >= 8:
+    #     return redirect("/result")
+
+    question_indices = session.get("question_indices")
+    q_index = question_indices[curr_index]
+    q = session["questions"][q_index]
+
+    return render_template(
+        "quiz.html",
+        q=q,
+        index=curr_index,
+        total=8,
+        selected=session["selected_answers"][curr_index]
+    )
+
+
 # ================= RUN =================
 if __name__ == "__main__":
     app.run(debug=True)

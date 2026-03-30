@@ -39,7 +39,7 @@ body {
     gap: 15px;
 }
 
-.nav-btn {
+.review-nav-btn {
     background-color: rgb(255, 145, 40);
     border: none;
     padding: 12px 18px;
@@ -48,11 +48,11 @@ body {
     color: rgb(25, 25, 35);
 }
 
-.nav-btn:hover{
+.review-nav-btn:hover{
     
     background-color: rgb(255, 170, 70);
 }
-.nav-btn:active{
+.review-nav-btn:active{
     background-color: rgb(220, 115, 20);
     transform: scale(0.97);
 }
@@ -64,17 +64,17 @@ body {
     border-radius: 10px;
 }
 
-#hint-btn {
+#review-hint-btn {
     background-color: rgb(255, 145, 40);
     padding: 12px;
     border-radius: 50%;
     color: rgb(25, 25, 35);
     cursor: pointer;
 }
-.hint-btn:hover{
+.review-hint-btn:hover{
     background-color: rgb(255, 170, 70);
 }
-.hint-btn:active{
+.review-hint-btn:active{
     background-color: rgb(220, 115, 20);
     transform: scale(0.97);
 }

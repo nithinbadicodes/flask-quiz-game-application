@@ -119,10 +119,21 @@ if (prevBtn) {
 
 
 // ================= FINAL PAGE =================
-const returnButton = document.getElementById("return-btn");
+const returnBtn = document.getElementById("return-btn");
+const reviewBtn = document.getElementById("review-btn")
 
-if (returnButton) {
-    returnButton.addEventListener("click", () => {
+
+if (returnBtn) {
+    returnBtn.addEventListener("click", () => {
         window.location.href = "/";
     });
 }
+
+if (reviewBtn) {
+    reviewBtn.addEventListener("click",()=>{
+        window.location.href = "/review";
+    })
+}
+
+// ================= REVIEW PAGE =================
+
