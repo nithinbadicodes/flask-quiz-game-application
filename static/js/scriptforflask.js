@@ -1,12 +1,10 @@
 console.log("JS loaded");
 
-
 // ================= PLAY BUTTON =================
 const playButton = document.getElementById("play-btn");
 
 if (playButton) {
     playButton.addEventListener("click", () => {
-        // window.location.href = "/quiz";
         window.location.href = "/start";
     });
 }
@@ -15,13 +13,11 @@ if (playButton) {
 // ================= POPUPS =================
 const difficultyPopup = document.getElementById("difficulty-popup");
 const instructionsPopup = document.getElementById("instructions-popup");
-const hintPopup = document.getElementById("hint-popup")
-
+const hintPopup = document.getElementById("hint-popup");
 
 const difficultyBtn = document.getElementById("difficulty-btn");
 const instructionsBtn = document.getElementById("instructions-btn");
-const hintBtn = document.getElementById("hint-btn")
-
+const hintBtn = document.getElementById("hint-btn");
 
 const difficultyOptions = document.querySelectorAll(".difficulty-option");
 const display = document.getElementById("difficulty-display");
@@ -40,21 +36,13 @@ if (instructionsBtn) {
 }
 
 if (hintBtn) {
-    hintBtn.addEventListener("click",()=>{
-        hintPopup.classList.add("active")
-    })
-}
-
-if (hintPopup){
-    hintPopup.addEventListener("click",(e)=>{
-        if (e.target == hintPopup){
-            hintPopup.classList.remove("active")
-        }
-    })
+    hintBtn.addEventListener("click", () => {
+        hintPopup.classList.add("active");
+    });
 }
 
 // CLOSE POPUPS
-[difficultyPopup, instructionsPopup].forEach(popup => {
+[difficultyPopup, instructionsPopup, hintPopup].forEach(popup => {
     if (popup) {
         popup.addEventListener("click", (e) => {
             if (e.target === popup) {
@@ -64,16 +52,16 @@ if (hintPopup){
     }
 });
 
+
 // ================= DIFFICULTY =================
 difficultyOptions.forEach(button => {
     button.addEventListener("click", () => {
-        const level = button.textContent;
+        const level = button.textContent.trim(); // "Easy", "Medium", "Hard"
 
         if (display) {
             display.textContent = "Difficulty Level: " + level;
         }
 
-        // send difficulty to Flask
         fetch("/set_difficulty", {
             method: "POST",
             headers: {
@@ -86,14 +74,13 @@ difficultyOptions.forEach(button => {
     });
 });
 
+
 // ================= QUIZ =================
-// const options = document.getElementsByClassName("options");
 const options = document.querySelectorAll(".options");
 const nextBtn = document.getElementById("next-btn");
 const prevBtn = document.getElementById("prev-btn");
 
-// OPTION CLICK → send answer to Flask
-// [...options].forEach((option, index) => {
+// OPTION CLICK
 options.forEach((option, index) => {
     option.addEventListener("click", () => {
 
@@ -103,32 +90,33 @@ options.forEach((option, index) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ answer: index })
-        })
-        .then(res => res.json())
-        .then(data => {
-
-            options.forEach(opt => {
-                opt.style.backgroundColor = "";
-            });
-
-            // highlight selected
-            option.style.backgroundColor = "lightblue";
         });
+
+        options.forEach(opt => opt.style.backgroundColor = "");
+        option.style.backgroundColor = "lightblue";
     });
 });
+
 
 // ================= NAVIGATION =================
 if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-        window.location.href = "/next";
+        fetch("/next", { method: "POST" })
+        .then(() => {
+            window.location.href = "/quiz";
+        });
     });
 }
 
 if (prevBtn) {
     prevBtn.addEventListener("click", () => {
-        window.location.href = "/prev";
+        fetch("/prev", { method: "POST" })
+        .then(() => {
+            window.location.href = "/quiz";
+        });
     });
 }
+
 
 // ================= FINAL PAGE =================
 const returnButton = document.getElementById("return-btn");

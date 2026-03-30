@@ -8,9 +8,6 @@ app = Flask(__name__)
 app.secret_key = "your_secret_key"
 
 
-# ================= QUESTIONS =================
-
-
 # ================= ROUTES =================
 
 @app.route("/")
@@ -30,25 +27,25 @@ def start():
 
     questions = all_questions.get(difficulty, easy_questions)
 
-
-    session['questions'] = questions
+    session["questions"] = questions
     session["question_indices"] = random.sample(range(len(questions)), 8)
     session["current_index"] = 0
     session["selected_answers"] = [None] * 8
-    session["difficulty"] = difficulty  # ensure consistency
 
     return redirect("/quiz")
+
 
 @app.route("/quiz")
 def quiz():
     curr_index = session.get("current_index", 0)
-    # question_indices = session.get('question_indices', random.sample(range(len(session['questions'])),8))
-    
-    print(curr_index)
-    # print(q_index)
-    # print(session['questions'])
-    # q_index = question_indices[curr_index]
-    q = session["questions"][curr_index]
+
+    # FIX: prevent index out of range
+    if curr_index >= 8:
+        return redirect("/result")
+
+    question_indices = session.get("question_indices")
+    q_index = question_indices[curr_index]
+    q = session["questions"][q_index]
 
     return render_template(
         "quiz.html",
@@ -58,32 +55,19 @@ def quiz():
         selected=session["selected_answers"][curr_index]
     )
 
-
-@app.route("/next", methods=["GET"])
+@app.route("/next", methods=["POST"])
 def next():
-    selected = request.form.get("options")
-    curr_index = session["current_index"]
-    print(selected)
-    if selected is not None:
-        session["selected_answers"][curr_index] = int(selected)
-
-    session["current_index"] += 1
-
-    if session["current_index"] >= 8:
+    # FIX: stop at last question
+    if session["current_index"] < 7:
+        session["current_index"] += 1
+        return redirect("/quiz")
+    else:
+        session["current_index"] = 8
         return redirect("/result")
 
-    return redirect("/quiz")
-
-
-@app.route("/prev", methods=["GET"])
+@app.route("/prev", methods=["POST"])
 def prev():
-    curr_index = session["current_index"]
-
-    selected = request.form.get("options")
-    if selected is not None:
-        session["selected_answers"][curr_index] = int(selected)
-
-    if curr_index > 0:
+    if session["current_index"] > 0:
         session["current_index"] -= 1
 
     return redirect("/quiz")
@@ -91,34 +75,22 @@ def prev():
 
 @app.route("/set_difficulty", methods=["POST"])
 def set_difficulty():
-    data = request.get_json()  # get JSON from fetch
-
+    data = request.get_json()
     difficulty = data.get("difficulty")
-    print(data)
-    # store in session
-    session["difficulty"] = difficulty
 
-    print("Difficulty set to:", difficulty)
+    session["difficulty"] = difficulty
 
     return jsonify({"status": "success"})
 
 
-
 @app.route("/answer", methods=["POST"])
 def answer():
-    data = request.get_json()  # get JSON from fetch
+    data = request.get_json()
 
     selected = data.get("answer")
     curr_index = session.get("current_index", 0)
 
-    # make sure list exists
-    if "selected_answers" not in session:
-        session["selected_answers"] = [None] * 8  # adjust size if needed
-
-    # store answer
     session["selected_answers"][curr_index] = selected
-
-    print("Saved answer:", selected, "for question:", curr_index)
 
     return jsonify({"status": "success"})
 
@@ -127,11 +99,15 @@ def answer():
 def result():
     score = 0
 
-    for i, q in enumerate(session["questions"]):
-        if session["selected_answers"][i] == q["answer"]:
+    questions = session["questions"]
+    question_indices = session["question_indices"]
+    selected_answers = session["selected_answers"]
+
+    for i, q_index in enumerate(question_indices):
+        if selected_answers[i] == questions[q_index]["answer"]:
             score += 1
 
-    return render_template('final.html',score=score)
+    return render_template('final.html', score=score)
 
 
 # ================= RUN =================
