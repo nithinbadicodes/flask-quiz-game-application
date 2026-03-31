@@ -182,7 +182,7 @@ if (returnBtn) {
 
 if (reviewBtn) {
     reviewBtn.addEventListener("click",()=>{
-        window.location.href = "/review";
+        window.location.href = "/end";
     })
 }
 

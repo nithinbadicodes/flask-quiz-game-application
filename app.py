@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, session, redirect, request
+from flask import Flask, jsonify, render_template, session, redirect, request, url_for
 import random
 from data.easy_questions import easy_questions
 from data.medium_questions import medium_questions
@@ -89,7 +89,7 @@ def review_next():
         session["current_index"] += 1
         return redirect("/review")
     else:
-        session["current_index"] = 8
+        # session["current_index"] = 8
         return redirect("/result")
 
 
@@ -139,21 +139,30 @@ def result():
     return render_template('final.html', score=score)
 
 
-@app.route("/review",methods=['GET'])
-def review():
-    print('review function entered')
-    q=session['questions']
-    # session.clear()
 
+@app.route("/end")
+def end():
+    session["current_index"] = 0  # reset for review navigation
+    return redirect("/review")
+
+
+
+@app.route("/review")
+def review():
     curr_index = session.get("current_index", 0)
+
+    question_indices = session.get("question_indices")
+    questions = session.get("questions")
+
+    q_index = question_indices[curr_index]
+    q = questions[q_index]
+
     return render_template(
         "review.html",
         q=q,
         index=curr_index,
         total=8,
-        # selected=session["selected_answers"][curr_index]
     )
-
 
 # ================= RUN =================
 if __name__ == "__main__":
