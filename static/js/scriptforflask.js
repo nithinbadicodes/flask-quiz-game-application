@@ -56,7 +56,7 @@ if (hintBtn) {
 // ================= DIFFICULTY =================
 difficultyOptions.forEach(button => {
     button.addEventListener("click", () => {
-        const level = button.textContent.trim(); // "Easy", "Medium", "Hard"
+        const level = button.textContent.trim();
 
         if (display) {
             display.textContent = "Difficulty Level: " + level;
@@ -73,7 +73,6 @@ difficultyOptions.forEach(button => {
         difficultyPopup.classList.remove("active");
     });
 });
-
 
 // ================= QUIZ =================
 const options = document.querySelectorAll(".options");

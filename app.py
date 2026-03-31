@@ -14,37 +14,41 @@ app.secret_key = "your_secret_key"
 def home():
     return render_template("front.html")
 
+
 @app.route("/start")
 def start():
-    #  SAVE difficulty BEFORE clearing
-    difficulty = session.get('difficulty', 'Easy')
+    difficulty = session.get('difficulty', 'easy').lower()
 
-    session.clear()  # clear everything
-
-    #  RESTORE difficulty
+    session.clear()
     session["difficulty"] = difficulty
 
     all_questions = {
-        "Easy": easy_questions,
-        "Medium": medium_questions,
-        "Hard": hard_questions
+        "easy": easy_questions,
+        "medium": medium_questions,
+        "hard": hard_questions
     }
-
+    print(len(easy_questions))
+    print(len(medium_questions))
+    print(len(hard_questions))
     questions = all_questions.get(difficulty, easy_questions)
 
+    
     session["questions"] = questions
-    session["question_indices"] = random.sample(range(len(questions)), 8)
+
+    indices = list(range(len(questions)))
+    random.shuffle(indices)
+    session["question_indices"] = indices[:8]
+
     session["current_index"] = 0
     session["selected_answers"] = [None] * 8
 
     return redirect("/quiz")
 
-
-
 @app.route("/quiz")
 def quiz():
     curr_index = session.get("current_index", 0)
-
+    print(curr_index)
+    print(session['difficulty'])
     # FIX: prevent index out of range
     if curr_index >= 8:
         return redirect("/result")
@@ -52,6 +56,7 @@ def quiz():
     question_indices = session.get("question_indices")
     q_index = question_indices[curr_index]
     q = session["questions"][q_index]
+
 
     return render_template(
         "quiz.html",
@@ -102,11 +107,11 @@ def review_prev():
 def set_difficulty():
     data = request.get_json()
     difficulty = data.get("difficulty")
-
-    session["difficulty"] = difficulty
+    
+    session["difficulty"] = difficulty.lower()
+    print("Stored difficulty:", session["difficulty"])
 
     return jsonify({"status": "success"})
-
 
 @app.route("/answer", methods=["POST"])
 def answer():
@@ -125,6 +130,9 @@ def answer():
 def result():
     score = 0
 
+    # for i, q in enumerate(session["questions"]):
+    #     if session["selected_answers"][i] == q["answer"]:
+    #         score += 1
     questions = session["questions"]
     question_indices = session["question_indices"]
     selected_answers = session["selected_answers"]

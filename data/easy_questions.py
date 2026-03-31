@@ -228,5 +228,11 @@ easy_questions = [
 ]
 
 import random
+
 for question in easy_questions:
-    random.shuffle(question['options'])
+    correct_answer = question["options"][question["answer"]]
+
+    random.shuffle(question["options"])
+
+    # Update answer index after shuffle
+    question["answer"] = question["options"].index(correct_answer)
