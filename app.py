@@ -14,9 +14,10 @@ app.secret_key = "your_secret_key"
 def home():
     return render_template("front.html")
 
+
 @app.route("/start")
 def start():
-    difficulty = session.get('difficulty', 'easy')
+    difficulty = session.get('difficulty', 'easy').lower()
 
     session.clear()
     session["difficulty"] = difficulty
@@ -26,16 +27,22 @@ def start():
         "medium": medium_questions,
         "hard": hard_questions
     }
-
+    print(len(easy_questions))
+    print(len(medium_questions))
+    print(len(hard_questions))
     questions = all_questions.get(difficulty, easy_questions)
 
+    
     session["questions"] = questions
-    session["question_indices"] = random.sample(range(len(questions)), 8)
+
+    indices = list(range(len(questions)))
+    random.shuffle(indices)
+    session["question_indices"] = indices[:8]
+
     session["current_index"] = 0
     session["selected_answers"] = [None] * 8
 
     return redirect("/quiz")
-
 
 @app.route("/quiz")
 def quiz():
@@ -50,8 +57,6 @@ def quiz():
     q_index = question_indices[curr_index]
     q = session["questions"][q_index]
 
-    # if session['difficulty'] == 'medium':
-    #     curr_index = 0
 
     return render_template(
         "quiz.html",
