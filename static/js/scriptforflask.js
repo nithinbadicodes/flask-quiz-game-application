@@ -14,10 +14,12 @@ if (playButton) {
 const difficultyPopup = document.getElementById("difficulty-popup");
 const instructionsPopup = document.getElementById("instructions-popup");
 const hintPopup = document.getElementById("hint-popup");
+const reviewHintPopup = document.getElementById("review-hint-popup");
 
 const difficultyBtn = document.getElementById("difficulty-btn");
 const instructionsBtn = document.getElementById("instructions-btn");
 const hintBtn = document.getElementById("hint-btn");
+const reviewHintBtn = document.getElementById("review-hint-btn");
 
 const difficultyOptions = document.querySelectorAll(".difficulty-option");
 const display = document.getElementById("difficulty-display");
@@ -28,6 +30,7 @@ if (difficultyBtn) {
         difficultyPopup.classList.add("active");
     });
 }
+
 
 if (instructionsBtn) {
     instructionsBtn.addEventListener("click", () => {
@@ -40,9 +43,14 @@ if (hintBtn) {
         hintPopup.classList.add("active");
     });
 }
+if (reviewHintBtn) {
+    reviewHintBtn.addEventListener("click", () => {
+        reviewHintPopup.classList.add("active");
+    });
+}
 
 // CLOSE POPUPS
-[difficultyPopup, instructionsPopup, hintPopup].forEach(popup => {
+[difficultyPopup, instructionsPopup, hintPopup,reviewHintPopup].forEach(popup => {
     if (popup) {
         popup.addEventListener("click", (e) => {
             if (e.target === popup) {

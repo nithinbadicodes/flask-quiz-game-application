@@ -32,20 +32,20 @@
 
             <!-- QUESTION BOX -->
             <div class="question-box">
-                <p id="question-text">{{ q.question }}</p>
+                <p id="question-text">{{ q[index].question }}</p>
             </div>
 
             <!-- OPTIONS -->
             <div class="options-grid">
-                {% for option in q.options %}
+                {% for option in q[index].options %}
                     <button class="review-options">{{ option }}</button>
                 {% endfor %}
             </div>
 
             <!-- HINT POPUP -->
             <div id="review-hint-popup" class="popup">
-                <div class="popup-content hint-box">
-                    <p id="hint-text">{{ q.hint }}</p>
+                <div class="popup-content review-hint-box">
+                    <p id="hint-text">{{ q[index].hint }}</p>
                 </div>
             </div>
 
