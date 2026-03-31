@@ -16,18 +16,15 @@ def home():
 
 @app.route("/start")
 def start():
-    #  SAVE difficulty BEFORE clearing
-    difficulty = session.get('difficulty', 'Easy')
+    difficulty = session.get('difficulty', 'easy')
 
-    session.clear()  # clear everything
-
-    #  RESTORE difficulty
+    session.clear()
     session["difficulty"] = difficulty
 
     all_questions = {
-        "Easy": easy_questions,
-        "Medium": medium_questions,
-        "Hard": hard_questions
+        "easy": easy_questions,
+        "medium": medium_questions,
+        "hard": hard_questions
     }
 
     questions = all_questions.get(difficulty, easy_questions)
@@ -40,11 +37,11 @@ def start():
     return redirect("/quiz")
 
 
-
 @app.route("/quiz")
 def quiz():
     curr_index = session.get("current_index", 0)
-
+    print(curr_index)
+    print(session['difficulty'])
     # FIX: prevent index out of range
     if curr_index >= 8:
         return redirect("/result")
@@ -52,6 +49,9 @@ def quiz():
     question_indices = session.get("question_indices")
     q_index = question_indices[curr_index]
     q = session["questions"][q_index]
+
+    # if session['difficulty'] == 'medium':
+    #     curr_index = 0
 
     return render_template(
         "quiz.html",
@@ -102,11 +102,11 @@ def review_prev():
 def set_difficulty():
     data = request.get_json()
     difficulty = data.get("difficulty")
-
-    session["difficulty"] = difficulty
+    
+    session["difficulty"] = difficulty.lower()
+    print("Stored difficulty:", session["difficulty"])
 
     return jsonify({"status": "success"})
-
 
 @app.route("/answer", methods=["POST"])
 def answer():
