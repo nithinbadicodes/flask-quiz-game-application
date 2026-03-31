@@ -27,9 +27,7 @@ def start():
         "medium": medium_questions,
         "hard": hard_questions
     }
-    print(len(easy_questions))
-    print(len(medium_questions))
-    print(len(hard_questions))
+
     questions = all_questions.get(difficulty, easy_questions)
 
     
@@ -144,9 +142,10 @@ def result():
 @app.route("/review",methods=['GET'])
 def review():
     print('review function entered')
-    curr_index = session.get("current_index", 0)
     q=session['questions']
+    # session.clear()
 
+    curr_index = session.get("current_index", 0)
     return render_template(
         "review.html",
         q=q,
