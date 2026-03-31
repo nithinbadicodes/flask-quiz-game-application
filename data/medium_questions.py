@@ -181,12 +181,12 @@ medium_questions = [
         "answer": 0,
         "hint": " Think about common negative assumptions society sometimes makes about disabled people."
     },
-    {
-        "question": "How many people in the world are disabled?",
-        "options": ["1 in 10", "1 in 6", "1 in 20", "1 in 100"],
-        "answer": 1,
-        "hint": "Global disability statistics are often expressed as a fraction of the population."
-    },
+    # {
+    #     "question": "How many people in the world are disabled?",
+    #     "options": ["1 in 10", "1 in 6", "1 in 20", "1 in 100"],
+    #     "answer": 1,
+    #     "hint": "Global disability statistics are often expressed as a fraction of the population."
+    # },
     {
         "question": "What is the most feared disability?",
         "options": [
@@ -231,18 +231,18 @@ medium_questions = [
         "answer": 1,
         "hint": "The film follows a young woman in India living with a motor-related neurological condition."
     },
-    {
-        "question": "What year did the first Paralympic Games take place?",
-        "options": ["1840", "1976", "1967", "1960"],
-        "answer": 3,
-        "hint": "The first official Paralympic Games were held in Rome."
-    },
-    {
-        "question": "In which country did judo make its Paralympic debut?",
-        "options": ["Japan", "Germany", "South Korea", "Canada"],
-        "answer": 2,
-        "hint": "This martial art sport debuted for visually impaired athletes in the Paralympics."
-    }
+    # {
+    #     "question": "What year did the first Paralympic Games take place?",
+    #     "options": ["1840", "1976", "1967", "1960"],
+    #     "answer": 3,
+    #     "hint": "The first official Paralympic Games were held in Rome."
+    # },
+    # {
+    #     "question": "In which country did judo make its Paralympic debut?",
+    #     "options": ["Japan", "Germany", "South Korea", "Canada"],
+    #     "answer": 2,
+    #     "hint": "This martial art sport debuted for visually impaired athletes in the Paralympics."
+    # }
 ]
 
 
