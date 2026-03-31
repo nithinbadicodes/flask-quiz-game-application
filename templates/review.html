@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Quiz Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/quiz-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/review-style.css') }}">
 </head>
 <body>
 
@@ -13,15 +13,15 @@
 
             <!-- NAVBAR -->
             <div class="navbar">
-                <button id="prev-btn" class="nav-btn" {% if index == 0 %}disabled{% endif %}>
+                <button id="review-prev-btn" class="review-nav-btn" {% if index == 0 %}disabled{% endif %}>
                     Prev page
                 </button>
 
                 <div id="qno">Qno: {{ index + 1 }}</div>
 
-                <div id="hint-btn">💡</div>
+                <div id="review-hint-btn">💡</div>
 
-                <button id="next-btn" class="nav-btn">
+                <button id="review-next-btn" class="review-nav-btn">
                     {% if index == total - 1 %}
                         Finish
                     {% else %}
@@ -38,12 +38,12 @@
             <!-- OPTIONS -->
             <div class="options-grid">
                 {% for option in q.options %}
-                    <button class="options">{{ option }}</button>
+                    <button class="review-options">{{ option }}</button>
                 {% endfor %}
             </div>
 
             <!-- HINT POPUP -->
-            <div id="hint-popup" class="popup">
+            <div id="review-hint-popup" class="popup">
                 <div class="popup-content hint-box">
                     <p id="hint-text">{{ q.hint }}</p>
                 </div>
