@@ -120,6 +120,7 @@ def answer():
     return jsonify({"status": "success"})
 
 
+
 @app.route("/result")
 def result():
     score = 0
